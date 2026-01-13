@@ -1,0 +1,9 @@
+flask
+moviepy
+gTTS
+arabic-reshaper
+python-bidi
+requests
+pillow
+imageio
+imageio-ffmpeg
