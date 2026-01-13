@@ -1,7 +1,14 @@
 from flask import Flask, request, jsonify
 import threading
 from gtts import gTTS
-from moviepy.editor import *
+from moviepy import (
+    AudioFileClip,
+    ImageClip,
+    TextClip,
+    CompositeVideoClip,
+    concatenate_videoclips
+)
+
 import arabic_reshaper
 from bidi.algorithm import get_display
 import requests
