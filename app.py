@@ -52,8 +52,9 @@ def build_video(scenes):
 @app.route("/upload", methods=["POST"])
 def upload():
     data = request.json
-    scenes = data.get("scenes", [])
+    print("📥 Received from n8n:", data, flush=True)
 
+    scenes = data.get("scenes", [])
     if not scenes:
         return jsonify({"error": "No scenes provided"}), 400
 
@@ -61,13 +62,9 @@ def upload():
 
     return jsonify({
         "status": "accepted",
-        "message": "Video generation started"
+        "message": "Video generation started",
+        "scenes_count": len(scenes)
     }), 200
-
-@app.route("/", methods=["GET"])
-def health():
-    return "OK", 200
-
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
