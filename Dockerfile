@@ -1,17 +1,21 @@
 FROM python:3.10-slim
 
+# تثبيت المتطلبات الأساسية
 RUN apt-get update && apt-get install -y \
     ffmpeg \
     imagemagick \
     fonts-dejavu-core \
     && rm -rf /var/lib/apt/lists/*
 
-RUN sed -i 's/rights="none"/rights="read|write"/g' /etc/ImageMagick-6/policy.xml
-
+# مجلد العمل
 WORKDIR /app
-COPY . .
 
+# نسخ الملفات
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-EXPOSE 8080
+COPY app.py .
+
+# تشغيل Flask
+ENV PORT=8080
 CMD ["python", "app.py"]
